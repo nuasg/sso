@@ -4,13 +4,46 @@
 <head>
   <meta charset="UTF-8">
   <title>Sign in to ASG's network</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='//fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <style>
+    body {
+      background-image: url({% static 'university-hall.jpg' %});
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <h1>Hello</h1>
+      <div class="col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6 box text-center">
+        <a href="https://asg.northwestern.edu"><img class="logo" src="{% static 'asg-logo.png' %}" alt=""></a>
+        <h1 class="title">Sign in to the ASG network</h1>
+
+        <form class="form-horizontal" role="form" action="/" method="post">
+          {% csrf_token %}
+          <div class="form-group text-left">
+            <label for="netid" class="col-sm-4 control-label">NetID</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="netid" name="netid" placeholder="NetID">
+            </div>
+          </div>
+          <div class="form-group text-left">
+            <label for="password" class="col-sm-4 control-label">Password</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8 text-left">
+              <button type="submit" class="btn btn-primary btn-purple">Sign in</button>
+            </div>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
