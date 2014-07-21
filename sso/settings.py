@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sso'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,3 +81,47 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = ''
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = 'media'
+MEDIAFILES_DIRS = (
+    os.path.join(BASE_DIR, 'media'),
+)
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
+
+# Django auth LDAP
+
+import ldap
+from django_auth_ldap.config import LDAPSearch
+
+AUTHENTICATION_BACKENDS = (
+    'asg.auth.ASGLDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTH_LDAP_SERVER_URI = os.environ['NU_LDAP_URL']
+AUTH_LDAP_BIND_DN = 'cn=asgnulink,ou=pwcheck,dc=northwestern,dc=edu'
+AUTH_LDAP_BIND_PASSWORD = os.environ['NU_LDAP_PASSWORD']
+AUTH_LDAP_USER_ATTR_MAP = {
+    'first_name': 'givenName',
+    'last_name': 'sn',
+    'email': 'mail',
+    'username': 'uid',
+}
+AUTH_LDAP_ALWAYS_UPDATE_USER = False
+AUTH_LDAP_BASE_DN = 'dc=northwestern,dc=edu'
+AUTH_LDAP_USER_SEARCH = LDAPSearch(AUTH_LDAP_BASE_DN,
+    ldap.SCOPE_SUBTREE, '(uid=%(user)s)')
+
+
+try:
+    from local_settings import *
+except:
+    pass

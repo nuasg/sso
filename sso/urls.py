@@ -8,5 +8,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'sso.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^$', 'sso.views.sso_login', name='sso_login'),
+
     url(r'^admin/', include(admin.site.urls)),
 )
