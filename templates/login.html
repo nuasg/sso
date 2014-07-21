@@ -11,6 +11,10 @@
   <style>
     body {
       background-color: #555;
+      /* "University Hall Northwestern" by Madcoverboy
+       * Licensed under Creative Commons Attribution-Share Alike 3.0 via Wikimedia Commons - http://commons.wikimedia.org/wiki/File:University_Hall_Northwestern.jpg#mediaviewer/File:University_Hall_Northwestern.jpg 
+       * altered by Sheng Wu
+       */
       background-image: url({% static 'university-hall.jpg' %});
       background-size: cover;
       background-position: center;
@@ -33,13 +37,13 @@
           {% csrf_token %}
           <div class="form-group text-left">
             <label for="netid" class="col-sm-4 control-label">NetID</label>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
               <input type="text" class="form-control" id="netid" name="netid" placeholder="NetID">
             </div>
           </div>
           <div class="form-group text-left">
             <label for="password" class="col-sm-4 control-label">Password</label>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
               <input type="password" class="form-control" id="password" name="password" placeholder="Password">
             </div>
           </div>
