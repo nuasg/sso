@@ -36,7 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sso'
+    'sso',
+    'mama_cas',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,13 +97,21 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+# change order for mama cas
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+
 # Django auth LDAP
 
 import ldap
 from django_auth_ldap.config import LDAPSearch
 
 AUTHENTICATION_BACKENDS = (
-    'asg.auth.ASGLDAPBackend',
+    'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 

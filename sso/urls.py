@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^$', 'sso.views.sso_login', name='sso_login'),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('mama_cas.urls')),
 )
