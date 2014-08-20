@@ -33,12 +33,27 @@
         <a href="https://asg.northwestern.edu"><img class="logo" src="{% static 'asg-logo.png' %}" alt=""></a>
         <h1 class="title">Sign in to the ASG network</h1>
 
-        <form class="form-horizontal" role="form" action="/" method="post">
+        {% for message in messages %}
+          <div class="alert alert-info">{{ message|urlize }}</div>
+        {% endfor %}
+
+        {% if form.errors %}
+          {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+          {% endfor %}
+          {% for field in form %}
+            {% for error in field.errors %}
+              <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+          {% endfor %}
+        {% endif %}
+
+        <form class="form-horizontal" role="form" method="post">
           {% csrf_token %}
           <div class="form-group text-left">
-            <label for="netid" class="col-sm-4 control-label">NetID</label>
+            <label for="username" class="col-sm-4 control-label">NetID</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control form-purple" id="netid" name="netid" placeholder="NetID">
+              <input type="text" class="form-control form-purple" id="username" name="username" placeholder="NetID">
             </div>
           </div>
           <div class="form-group text-left">
@@ -49,7 +64,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-offset-4 col-sm-8 text-left">
-              <button type="submit" class="btn btn-primary btn-purple">Sign in</button>
+              <input type="submit" name="submit_login" class="btn btn-primary btn-purple" value="Sign in">
             </div>
           </div>
         </form>
